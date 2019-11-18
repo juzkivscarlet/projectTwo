@@ -1,6 +1,6 @@
 module.exports = function(app) {
     require('./api-users.js')(app);
-    app.get("/", function(req,res) {
+    app.get("/", (req,res) => {
         res.render("index");
     });
 };

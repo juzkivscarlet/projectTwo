@@ -37,7 +37,7 @@ nav, footer {
     filter: drop-shadow(2px 2px 8px black);
 }
 
-.container {
+#body {
     position: relative;
     display: block;
     margin-top: 200px;
