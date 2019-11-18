@@ -1,5 +1,13 @@
 $(document).ready(function() {
 
+	// add on 'hover' listener to Account Button dropdown menu, with sliding animations.
+	$("#nav-dropdown-btn").hover(() => {
+		$("#nav-dropdown-content").slideDown(500);
+	});
+	$("#nav-dropdown-content").mouseleave(() => {
+		$("#nav-dropdown-content").slideUp(500);
+	});
+
 	// show modals
 	$("#login-modal").on('shown.bs.modal', () => {
 		$("#login-modal").trigger('focus');

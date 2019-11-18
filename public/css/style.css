@@ -1,5 +1,5 @@
 html, body {
-    font-family: 'Fira Mono', monospace;
+    font-family: 'Gochi Hand', cursive;
     height: 100%;
 }
 
@@ -19,8 +19,11 @@ nav, footer {
 .dropdown-menu h6 {
     color: white;
     font-style: italic;
-    font-family: monospace;
+    font-family: cursive;
     text-shadow: 2px 2px 6px black;
+}
+.dropdown-item:hover {
+    color: #559;
 }
 
 .navbar-brand {

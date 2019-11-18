@@ -1,18 +1,38 @@
-Theme?
+Cheer me up:
 
-Topic and function of web app?
-- Think of title!
-- Accounts
+NOTES:
+Concentrate functionality!
 
-Games?
-- What kind of games?
+FUNCTIONALITY
 
-Put some time into graphics!
-Background texture.
-Maybe animations?
+Users can choose:
+- Sense of humor
+- Inspirational style
+- Cute things
+
+User calendar for stressful events coming up.
+- Create events with selection of reasons why the events are stressful.
+- Inspirational quote will be tailored to stress reasons.
+
+Weather:
+- Weather at current location
+- Weather at selected location
+- Weather "where it's better" (start with hardcoded: Honolulu, HI)
+- Weather "where it's worse" (start with hardcoded: Antarctica)
+
+Quote of the day for inspiration, based on future stressors.
+
+Word of the day.
+Dad joke of the day.
+Wholesome / amusing / cute GIFs
+Wholesome / amusing / cute Reddit threads.
+
+Astrology
 
 
-User profiles.
-- Customizable profile.
-- Get layout.
-- Upload pictures.
+DEVELOPMENT
+
+APIs:
+Dad Jokes - icanhazdadjoke.com/api
+calendar - ?
+Astrology - 
