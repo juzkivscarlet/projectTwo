@@ -1,0 +1,45 @@
+<nav class="navbar navbar-dark navbar-expand-lg fixed-top">
+    <a class="navbar-brand" href="">
+        <img src="/assets/favicon.ico" width="40" height="30" class="d-inline-block align-top" alt="logo">
+        tunebros
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-link" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar-links">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="#">home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">what?</a>
+            </li>
+            <li class="nav-item dropdown d-block d-lg-none d-xl-none">
+                <a class="nav-link dropdown-toggle" href="" id="nav-dropdown-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    &darr; account
+                </a>
+                <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="nav-dropdown-link">
+                    <h6 class="dropdown-header">hello!</h6>
+                    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#signup-modal">signup</button>
+                    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#login-modal">login</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="dropdown d-none d-lg-block">
+        <button class="btn btn-outline-light dropdown-toggle" type="button" id="nav-dropdown-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            &darr; account
+        </button>
+        <div class="dropdown-menu dropdown-menu-right text-right" aria-labelledby="nav-dropdown-btn">
+            <h6 class="dropdown-header">hello!</h6>
+            <button type="button" class="dropdown-item" data-toggle="modal" data-target="#signup-modal">create new account</button>
+            <button class="dropdown-item" type="button" data-toggle="modal" data-target="#login-modal">login</a>
+        </div>
+    </div>
+
+</nav>
+
+{{> login}}
+{{> signup}}

@@ -1,0 +1,18 @@
+Social media website for music lovers.
+- Think of title!
+- Accounts
+
+Games?
+- What kind of games?
+
+Put some time into graphics!
+Background texture.
+Maybe animations?
+
+
+User profiles.
+- Customizable profile.
+- Get layout.
+- Upload pictures.
+
+Firebase
