@@ -7,6 +7,7 @@ var db = require('../models');
 var bcrypt = require('bcryptjs');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+require('dotenv');
 
 module.exports = function(app) {
 
@@ -16,7 +17,7 @@ module.exports = function(app) {
 
 		try {
 			// encrypt password
-			var password = await bcrypt.hash(req.body.password,10);
+			var password = await bcrypt.hash(req.body.password, process.env.BCRYPT_SALT);
 
 			// SQL: insert into Users (name,username,email,password_hash)...
 			db.Users.create({
