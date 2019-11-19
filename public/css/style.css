@@ -1,8 +1,8 @@
 html, body {
-    /* font-family: 'Gochi Hand', cursive; */
     height: 100%;
 }
 
+/* Style HTML elements */
 nav, footer {
     position: absolute;
     background-color: #559;
@@ -17,6 +17,22 @@ footer {
     height: 5%;
 }
 
+/* Styling for Classes */
+
+/* Navbar classes styling */
+.navbar-brand {
+    text-shadow: 2px 2px 8px black;
+}
+.navbar-brand:hover, a.nav-link:hover {
+    color: white;
+    filter: drop-shadow(2px 2px 8px silver);
+    text-shadow: none;
+}
+.navbar-brand img {
+    filter: drop-shadow(2px 2px 8px black);
+}
+
+/* Navbar dropdown classes styling */
 .dropdown-menu {
     background-color: #559;
     box-shadow: 0px 0px 10px black;
@@ -35,19 +51,8 @@ footer {
     color: #559;
 }
 
-.navbar-brand {
-    text-shadow: 2px 2px 8px black;
-}
 
-.navbar-brand:hover, a.nav-link:hover {
-    color: white;
-    filter: drop-shadow(2px 2px 8px silver);
-    text-shadow: none;
-}
-
-.navbar-brand img {
-    filter: drop-shadow(2px 2px 8px black);
-}
+/* Styling for ID's */
 
 #body {
     position: relative;

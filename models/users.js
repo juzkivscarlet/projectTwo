@@ -1,4 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
+
+    // sql: create table Users (name, username, password_hash, email)
     var Users = sequelize.define("Users", {
         name: {
             type: DataTypes.STRING

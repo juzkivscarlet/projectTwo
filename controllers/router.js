@@ -1,7 +1,8 @@
 module.exports = function(app) {
+    // require api-users.js (another router)
     require('./api-users.js')(app);
 
-    
+    // routes for '/' and '/dashboard' both load homepage
     app.get("/", (req,res) => {
         res.render("index", {
             loggedIn: false,
@@ -18,6 +19,7 @@ module.exports = function(app) {
         });
     });
 
+    // route for '/amazing'
     app.get('/amusing', (req,res) => {
         res.render("amuse", {
             loggedIn: false,
@@ -26,6 +28,7 @@ module.exports = function(app) {
         });
     });
 
+    // route for '/interesting'
     app.get('/interesting', (req,res) => {
         res.render("interest", {
             loggedIn: false,

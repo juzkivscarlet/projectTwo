@@ -1,8 +1,11 @@
+{{!-- MODAL FOR USER SIGNUP --}}
+
 <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 
 		<div class="modal-content">
 
+			{{!-- Modal Header --}}
 			<div class="modal-header">
 				<h5 class="modal-title">signup</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="close">
@@ -10,15 +13,20 @@
 				</button>
 			</div>
 
+			{{!-- Modal Body --}}
 			<div class="modal-body">
 				<form class="form-horizontal container" action="/signup" id="signup-form">
 
+					{{!-- Div for errors, invalid inputs --}}
 					<div id="signup-errors">
 						{{!-- Added via /public/js/site.js --}}
 					</div>
 
+					{{!-- Name inputs --}}
 					<label class="control-label">name: </label>
 					<div class="form-group row">
+
+						{{!-- First name --}}
 						<div class="col">
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
@@ -28,6 +36,7 @@
 							</div>
 						</div>
 
+						{{!-- Last name --}}
 						<div class="col">
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
@@ -36,8 +45,10 @@
 								<input type="text" class="form-control" id="lastName" placeholder="last name" required>
 							</div>
 						</div>
+
 					</div>
 
+					{{!-- Email address --}}
 					<div class="form-group row">
 						<label class="control-label col-sm-4" for="email">email address: </label>
 						<div class="col-sm-8">
@@ -45,6 +56,7 @@
 						</div>
 					</div>
 
+					{{!-- Username --}}
 					<div class="form-group row">
 						<label class="control-label col-sm-4" for="username">username: </label>
 						<div class="col-sm-8">
@@ -52,6 +64,7 @@
 						</div>
 					</div>
 
+					{{!-- Password --}}
 					<div class="form-group row">
 						<label class="control-label col-sm-4" for="password">password: </label>
 						<div class="col-sm-8">
@@ -59,6 +72,7 @@
 						</div>
 					</div>
 
+					{{!-- Confirm Password --}}
 					<div class="form-group row">
 						<label class="control-label col-sm-4" for="confirmPassword">confirm password: </label>
 						<div class="col-sm-8">
@@ -66,12 +80,14 @@
 						</div>
 					</div>
 
+					{{!-- Submit signup button --}}
 					<div class="text-center">
 						<button type="submit" class="btn btn-primary" id="signup-btn">signup!</button>
 					</div>
 				</form>
 			</div>
 
+			{{!-- Cancel signup, close modal --}}
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
 			</div>
