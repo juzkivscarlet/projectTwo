@@ -1,6 +1,9 @@
 // Require dependencies
 var express = require('express');
 var handlebars = require('express-handlebars');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var validator = require('express-validator');
 var session = require('express-session');
 var passport = require('passport');
 require('dotenv');
@@ -13,17 +16,13 @@ var app = express();
 var PORT = process.env.PORT || 8000;
 
 app.use(express.static("public"));
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:false}));
 app.use(express.json());
-// app.use(require('cookie-parser'));
-// app.use(require('body-parser').urlencoded({extended:true}));
-// app.use(session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: false
-// }));
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:false}));
+// app.use(validator());
+app.use(cookieParser());
+app.use(session({secret: 'doggo', saveUninitialized: false, resave: false}));
 app.engine("handlebars", handlebars({
     defaultLayout:"main",
     layoutsDir: "./views/layouts/",
@@ -35,7 +34,7 @@ app.set("view engine", "handlebars");
 require('./controllers/router.js')(app);
 
 // Listener & sequelize
-db.sequelize.sync().then(function() {
+db.sequelize.sync({force:true}).then(function() {
     app.listen(PORT, function() {
         console.log("http://localhost:"+PORT);
     });

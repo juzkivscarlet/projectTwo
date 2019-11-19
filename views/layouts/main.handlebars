@@ -4,7 +4,12 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>keep cheerful</title>
+		{{#if isHome}}
+			<title>keep cheerful</title>
+
+			{{else}}
+				<title>keep cheerful - {{route}}</title>
+		{{/if}}
 
 		{{!-- Link favicon & Font 'Gochi Hand' --}}
 		<link rel="shortcut icon" href="/assets/favicon.ico">
