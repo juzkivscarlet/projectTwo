@@ -1,13 +1,38 @@
 html, body {
-    font-family: 'Fira Mono', monospace;
     height: 100%;
 }
 
+/* Style HTML elements */
 nav, footer {
+    position: absolute;
     background-color: #559;
     color: white;
 }
+nav {
+    height: 5%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+footer {
+    height: 5%;
+}
 
+/* Styling for Classes */
+
+/* Navbar classes styling */
+.navbar-brand {
+    text-shadow: 2px 2px 8px black;
+}
+.navbar-brand:hover, a.nav-link:hover {
+    color: white;
+    filter: drop-shadow(2px 2px 8px silver);
+    text-shadow: none;
+}
+.navbar-brand img {
+    filter: drop-shadow(2px 2px 8px black);
+}
+
+/* Navbar dropdown classes styling */
 .dropdown-menu {
     background-color: #559;
     box-shadow: 0px 0px 10px black;
@@ -19,26 +44,18 @@ nav, footer {
 .dropdown-menu h6 {
     color: white;
     font-style: italic;
-    font-family: monospace;
+    font-family: cursive;
     text-shadow: 2px 2px 6px black;
 }
-
-.navbar-brand {
-    text-shadow: 2px 2px 8px black;
+.dropdown-item:hover {
+    color: #559;
 }
 
-.navbar-brand:hover, a.nav-link:hover {
-    color: white;
-    filter: drop-shadow(2px 2px 8px silver);
-    text-shadow: none;
-}
 
-.navbar-brand img {
-    filter: drop-shadow(2px 2px 8px black);
-}
+/* Styling for ID's */
 
-.container {
+#body {
     position: relative;
-    display: block;
-    margin-top: 200px;
+    top: 5%;
+    bottom: 5%;
 }

@@ -1,9 +1,31 @@
 $(document).ready(function() {
-	$("#login-modal").on('shown.bs.modal', function() {
+
+	// add on 'hover' listener to Account Button dropdown menu, with sliding animations.
+	$("#nav-dropdown-btn").hover(() => {
+		$("#nav-dropdown-content").slideDown(500);
+	});
+	$("#nav-dropdown-content").mouseleave(() => {
+		$("#nav-dropdown-content").slideUp(500);
+	});
+
+	// show modals
+	$("#login-modal").on('shown.bs.modal', () => {
 		$("#login-modal").trigger('focus');
 	});
 
-	$("#signup-modal").on('shown.bs.modal', function() {
+	$("#signup-modal").on('shown.bs.modal', () => {
 		$("#signup-modal").trigger('focus');
+	});
+
+	// Login & Signup btns: onclick functions
+
+	$("#login-btn").on('click', (e) => {
+		e.preventDefault();
+	});
+
+	$("#signup-btn").on('click', (e) => {
+		e.preventDefault();
+		registerUser();
+		// registerUser function definition in ./signup.js
 	});
 });
