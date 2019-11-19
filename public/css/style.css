@@ -1,5 +1,5 @@
 html, body {
-    font-family: 'Gochi Hand', cursive;
+    /* font-family: 'Gochi Hand', cursive; */
     height: 100%;
 }
 
@@ -10,6 +10,8 @@ nav, footer {
 }
 nav {
     height: 5%;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 footer {
     height: 5%;
