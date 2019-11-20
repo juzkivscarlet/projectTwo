@@ -17,15 +17,17 @@ $(document).ready(function() {
 		$("#signup-modal").trigger('focus');
 	});
 
-	// Login & Signup btns: onclick functions
+	// Login & Signup btns (from respective modals): onclick functions
 
 	$("#login-btn").on('click', (e) => {
 		e.preventDefault();
+		gatherLoginForm();
+		// gatherLoginForm() function definition in ./login.js
 	});
 
 	$("#signup-btn").on('click', (e) => {
 		e.preventDefault();
 		registerUser();
-		// registerUser function definition in ./signup.js
+		// registerUser() function definition in ./signup.js
 	});
 });

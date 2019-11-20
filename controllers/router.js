@@ -5,7 +5,7 @@ module.exports = function(app) {
     // routes for '/' and '/dashboard' both load homepage
     app.get("/", (req,res) => {
         res.render("index", {
-            loggedIn: false,
+            user: req.user,
             isHome: true,
             route: 'index'
         });
@@ -13,7 +13,7 @@ module.exports = function(app) {
 
     app.get("/dashboard", (req,res) => {
         res.render("index", {
-            loggedIn: false,
+            user: req.user,
             isHome: true,
             route: 'index'
         });
@@ -22,7 +22,7 @@ module.exports = function(app) {
     // route for '/amazing'
     app.get('/amusing', (req,res) => {
         res.render("amuse", {
-            loggedIn: false,
+            user: req.user,
             isHome: false,
             route: 'amusing'
         });
@@ -31,7 +31,7 @@ module.exports = function(app) {
     // route for '/interesting'
     app.get('/interesting', (req,res) => {
         res.render("interest", {
-            loggedIn: false,
+            user: req.user,
             isHome: false,
             route: 'interesting'
         });
