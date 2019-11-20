@@ -1,30 +1,41 @@
 // Require dependencies
+// express modules
 var express = require('express');
 var handlebars = require('express-handlebars');
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
 var validator = require('express-validator');
 var session = require('express-session');
+
+// parser modules
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+
+// Require all Models, + passport & dotenv modules
+var db = require('./models');
 var passport = require('./config/passport');
 require('dotenv');
-
-// Require all Models in ./models directory
-var db = require('./models');
 
 // Setup server w/ express
 var app = express();
 var PORT = process.env.PORT || 8000;
 
+// setup express
 app.use(express.static("public"));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
+// setup body-parser & cookie-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 // app.use(validator());
 app.use(cookieParser());
+
+// setup express-session
 app.use(session({secret: 'doggo', saveUninitialized: false, resave: false}));
+
+// setup passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+// setup handlebars
 app.engine("handlebars", handlebars({
     defaultLayout:"main",
     layoutsDir: "./views/layouts/",
@@ -32,7 +43,7 @@ app.engine("handlebars", handlebars({
 }));
 app.set("view engine", "handlebars");
 
-// Require router
+// Require routers
 require('./controllers/router.js')(app);
 require('./controllers/api-users.js')(app);
 

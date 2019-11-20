@@ -17,17 +17,18 @@ module.exports = function(app) {
 
 	// POST request for /signup
 	app.post("/signup", async(req,res) => {
-		console.log(req.body);
 
-		// SQL: insert into Users (name,username,email,password_hash)...
+		// SQL: insert into Users (name,username,email,password)...
 		db.Users.create({
 			name: req.body.name,
 			username: req.body.username,
 			email: req.body.email,
 			password: req.body.password
 		}).then(() => {
+			// redirect to / (homepage)
 			res.redirect(307, "/login");
 		}).catch((err) => {
+			// if error
 			res.status(401).json(err);
 		});
 	});
@@ -35,13 +36,16 @@ module.exports = function(app) {
 	// GET request for logout
 	app.get("/logout", (req,res) => {
 		res.logout();
+		// redirect to homepage
 		res.redirect("/");
 	});
 
 	// Route for user data
 	app.get("/api/user_data", (req,res) => {
+		// if user isn't logged in, return empty JSON object
 		if(!req.user) res.json({});
 		else {
+			// if user is logged in, return JSON: {name, username, id}
 			res.json({
 				name: req.user.name,
 				username: req.user.username,
