@@ -1,6 +1,6 @@
 module.exports = function(app) {
     // require passport middleware
-    require('../config/middleware/');
+    require('../config/middleware/isAuthenticated');
 
     // routes for '/' and '/dashboard' both load homepage
     app.get("/", (req,res) => {

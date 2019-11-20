@@ -9,12 +9,14 @@ nav, footer {
     color: white;
 }
 nav {
-    height: 5%;
+    height: 8%;
     margin-top: auto;
     margin-bottom: auto;
 }
 footer {
-    height: 5%;
+    height: 4%;
+    padding-top: auto;
+    padding-bottom: auto;
 }
 
 /* Styling for Classes */
@@ -30,6 +32,9 @@ footer {
 }
 .navbar-brand img {
     filter: drop-shadow(2px 2px 8px black);
+}
+li.nav-item {
+    font-style: italic;
 }
 
 /* Navbar dropdown classes styling */
@@ -56,6 +61,6 @@ footer {
 
 #body {
     position: relative;
-    top: 5%;
-    bottom: 5%;
+    top: 8%;
+    bottom: 4%;
 }
