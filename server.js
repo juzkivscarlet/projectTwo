@@ -5,10 +5,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var validator = require('express-validator');
 var session = require('express-session');
-var passport = require('passport');
-var fs = require('fs');
-var readline = require('readline');
-var {google} = require('googleapis');
+var passport = require('./config/passport');
 require('dotenv');
 
 // Require all Models in ./models directory
@@ -26,6 +23,8 @@ app.use(bodyParser.urlencoded({extended:false}));
 // app.use(validator());
 app.use(cookieParser());
 app.use(session({secret: 'doggo', saveUninitialized: false, resave: false}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.engine("handlebars", handlebars({
     defaultLayout:"main",
     layoutsDir: "./views/layouts/",
@@ -35,6 +34,7 @@ app.set("view engine", "handlebars");
 
 // Require router
 require('./controllers/router.js')(app);
+require('./controllers/api-users.js')(app);
 
 // Listener & sequelize
 db.sequelize.sync({force:true}).then(function() {

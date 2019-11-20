@@ -1,6 +1,6 @@
 module.exports = function(app) {
     // require api-users.js (another router)
-    require('./api-users.js')(app);
+    require('../config/middleware/isAuthenticated.js');
 
     // routes for '/' and '/dashboard' both load homepage
     app.get("/", (req,res) => {

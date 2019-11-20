@@ -27,19 +27,17 @@ function registerUser() {
 		};
 
 		// POST request to /signup with submittedInfo
-		$.ajax({
-			type: 'POST',
-			url: '/signup',
-			data: submittedInfo,
-			dataType: 'json'
-		}).then(() => {
-			// Fade modal out, then reload home page
-			$("#signup-modal").fadeOut(500);
-			setTimeout(() => {
-				$("#signup-modal").modal('hide');
-				window.location.href = "/";
-			},1000);
-		});
+		$.post("/signup",submittedInfo).then(() => {
+			window.location.replace("/");
+		}).catch();
+		// $.ajax({
+		// 	type: 'POST',
+		// 	url: '/signup',
+		// 	data: submittedInfo,
+		// 	dataType: 'json'
+		// }).then(() => {
+		// 	// Fade modal out, then reload home page
+		// });
 
 	} else if(!validateSignup(formData)) {
 		// if validateSignup returns false, does not reload page, keeps modal on page
