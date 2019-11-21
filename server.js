@@ -39,13 +39,21 @@ app.use(passport.session());
 app.engine("handlebars", handlebars({
     defaultLayout:"main",
     layoutsDir: "./views/layouts/",
-    partialsDir: "./views/partials/"
+    partialsDir: "./views/partials/",
+    helpers: {
+        is: function(a,b,opt) {
+            if(a==b) return opt.fn(this);
+            else return opt.inverse(this);
+        },
+        fontAwesome: `https://kit.fontawesome.com/${process.env.FONT_AWESOME}.js`
+    }
 }));
 app.set("view engine", "handlebars");
 
 // Require routers
 require('./controllers/router.js')(app);
 require('./controllers/api-users.js')(app);
+require('./controllers/external-api.js')(app);
 
 // Listener & sequelize
 db.sequelize.sync({force:true}).then(function() {

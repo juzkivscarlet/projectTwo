@@ -36,3 +36,4 @@ APIs:
 Dad Jokes - icanhazdadjoke.com/api
 calendar - ?
 Astrology - 
+Weather: openWeather

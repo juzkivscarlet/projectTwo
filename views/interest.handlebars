@@ -1,0 +1,146 @@
+<h1 class="text-center">Weather!</h1>
+<div class="card-group" id="weather-cards">
+
+	<div class="card" id="weather-here">
+		<div class="card-header text-left"><i class="fas fa-map-marker-alt"></i>Where you are!</div>
+
+		{{!-- Card body header --}}
+		<div class="card-body">
+			<h5 class="card-title text-left">Your weather</h5>
+			<div class="text-center">
+				<span class="fas fa-map-marker-alt fa-7x"></span>
+			</div>
+		</div>
+
+		{{!-- Display location --}}
+		<div class="card-body">
+			{{!-- edited with js/interesting.js --}}
+			<h5 class="card-title" id="user-location">
+				{{!-- City name --}}
+				<div id="here-city"></div>
+				{{!-- Country name --}}
+				<div class="text-muted" id="here-country"></div>
+			</h5>
+		</div>
+
+		{{!-- Weather details --}}
+		<div class="card-body">
+			<ul>
+				<li id="weather-here-desc">
+					{{!-- Cloudy, sunny, etc. --}}
+				</li>
+				<li id="here-temperature">
+					Temp: <span id="here-temp-f"></span> 
+					(<span class="text-muted" id="here-temp-c"></span>)
+				</li>
+				<li id="here-winds">
+					Wind Speed: <span id="here-wind-imp"></span> 
+					(<span class="text-muted" id="here-wind-met"></span>)
+				</li>
+			</ul>
+		</div>
+
+		{{!-- Source --}}
+		<div class="card-footer">
+			<small class="text-muted">Source: OpenWeather</small>
+		</div>
+
+	</div>
+
+	<div class="card" id="weather-worse">
+		<div class="card-header text-center"><i class="fas fa-poo-storm"></i>Where it's worse:</div>
+
+		{{!-- Card body header --}}
+		<div class="card-body text-center">
+			<h5 class="card-title">At least you're not here!...</h5>
+			<span class="fas fa-poo-storm fa-7x"></span>
+		</div>
+
+		{{!-- Display location --}}
+		<div class="card-body">
+			<h5 class="card-title" id="worse-place">
+				<div id="worse-city">
+					South Pole,  
+				</div>
+				<div class="text-muted" id="worse-country">
+					Antarctica
+				</div>
+				<div class="font-italic text-muted">(Amundsen-Scott Research Station)</div>
+			</h5>
+		</div>
+
+		{{!-- Details --}}
+		<div class="card-body">
+			<ul>
+				<li id="weather-worse-desc">
+					{{!-- Cloudy, sunny, etc. --}}
+				</li>
+				<li id="worse-temperature">
+					Temp: <span id="worse-temp-f"></span> 
+					(<span class="text-muted" id="worse-temp-c"></span>)
+				</li>
+				<li id="worse-winds">
+					Wind Speed: <span id="worse-wind-imp"></span> 
+					(<span class="text-muted" id="worse-wind-met"></span>)
+				</li>
+			</ul>
+		</div>
+
+		{{!-- Source --}}
+		<div class="card-footer">
+			<small class="text-muted">Source: AccuWeather</small>
+		</div>
+
+	</div>
+
+	<div class="card" id="weather-better">
+		<div class="card-header text-right"><i class="fas fa-sun"></i>For the daydreamers:</div>
+
+		{{!-- Card body header --}}
+		<div class="card-body">
+			<h5 class="card-title text-right">...but you could be here!</h5>
+			<div class="text-center">
+				<span class="fas fa-sun fa-7x"></span>
+			</div>
+		</div>
+
+		{{!-- Display location --}}
+		<div class="card-body" id="better-place">
+			<h5 class="card-title">
+				<div id="better-city">
+					Somewhere Better
+				</div>
+				<div id="better-country">
+
+				</div>
+			</h5>
+		</div>
+
+		{{!-- Details --}}
+		<div class="card-body">
+			<ul>
+				<li id="weather-better-desc">
+					{{!-- Cloudy, sunny, etc. --}}
+				</li>
+				<li id="better-temperature">
+					Temp: <span id="better-temp-f"></span> 
+					(<span class="text-muted" id="better-temp-c"></span>)
+				</li>
+				<li id="better-winds">
+					Wind Speed: <span id="better-wind-imp"></span> 
+					(<span class="text-muted" id="better-wind-met"></span>)
+				</li>
+			</ul>
+		</div>
+
+		{{!-- Source --}}
+		<div class="card-footer">
+			<small class="text-muted">Source: ...</small>
+		</div>
+
+	</div>
+
+</div>
+
+
+<script type="text/javascript" src="/js/interesting.js"></script>
