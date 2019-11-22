@@ -15,7 +15,7 @@ module.exports = function(app) {
 			res.render("index", {
 				user: req.user,
 				isHome: true,
-				route: 'index'
+				route: 'dashboard'
 			});
 		}
 	});
@@ -31,7 +31,7 @@ module.exports = function(app) {
 			res.render("index", {
 				user: req.user,
 				isHome: true,
-				route: 'index'
+				route: 'dashboard'
 			});
 		}
 	});

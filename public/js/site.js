@@ -8,6 +8,11 @@ $(document).ready(function() {
 		$("#nav-dropdown-content").slideUp(500);
 	});
 
+	// highlight active navbar link
+	if(window.location.pathname=='/' || window.location.pathname=='/dashboard') $(".nav-link:contains('dashboard')").addClass('active');
+	else if(window.location.pathname=='/amusing') $(".nav-link:contains('amuse')").addClass('active');
+	else if(window.location.pathname=='/interesting') $(".nav-link:contains('interest')").addClass('active');
+
 	// show modals
 	$("#login-modal").on('shown.bs.modal', () => {
 		$("#login-modal").trigger('focus');

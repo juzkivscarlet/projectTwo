@@ -17,34 +17,15 @@
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 			{{!-- Links for Dashboard (Homepage), /amusing, & /interesting --}}
 
-			{{#if isHome}}
-				<li class="nav-item active">
-					<a class="nav-link" href="/">dashboard</a>
-				</li>
-			{{else}}
-				<li class="nav-item">
-					<a class="nav-link" href="/">dashboard</a>
-				</li>
-			{{/if}}
-			
-			{{#is route 'amusing'}}
-				<li class="nav-item">
-					<a class="nav-link active" href="/amusing">amuse me!</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/interesting">interest me!</a>
-				</li>
-
-			{{else}}
-				{{#is route 'interesting'}}
-				<li class="nav-item">
-					<a class="nav-link" href="/amusing">amuse me!</a>
-				</li>
-				<li class="nav-item active">
-					<a class="nav-link" href="/interesting">interest me!</a>
-				</li>
-				{{/is}}
-			{{/is}}
+			<li class="nav-item">
+				<a class="nav-link" href="/dashboard">dashboard</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/amusing">amuse me!</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/interesting">interest me!</a>
+			</li>
 
 			{{!-- Mobile: account dropdown link --}}
 			<li class="nav-item dropdown d-block d-lg-none d-xl-none">
