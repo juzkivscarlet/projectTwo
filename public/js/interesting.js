@@ -56,65 +56,61 @@ $(document).ready(function() {
 		else if(originalUnit=='mph') return parseFloat(a*1.609).toFixed(1);
 	}
 
-	var getLocation = () => {
-		if(navigator.geolocation) navigator.geolocation.getCurrentPosition(getWeatherHere);
-		else getWeatherHere(null);
+	var getLocation = (pos,crd) => {
+		var query;
+		if(pos=='here' && crd) {
+			query = `/${crd[0]}/${crd[1]}`;
+		} else if(pos=='worse') {
+			query = '/worse';
+		} else if(pos=='better') {
+			query = '/better';
+		}
+		getQuery(query,pos);
 	};
 
-	var getWeatherHere = (pos) => {
-		if(pos==null) {
-
-		} else {
-			console.log("Latitude: "+pos.coords.latitude);
-			console.log("Longitude: "+pos.coords.longitude);
-
-			$.get(`/weather/${pos.coords.latitude}/${pos.coords.longitude}`).then((data) => {
-				// console.log(data);
-
-				var place = [data.name, data.sys.country];
-
-				// OpenWeather gives temperature in Kelvin
-				var correctedTemp = parseInt(data.main.temp-273.15);
-				var temps = [
-					correctedTemp,
-					convertTemp('fahr',correctedTemp)
-				];
-
-				// OpenWeather gives wind speed in meters/second
-				// first convert wind speed to km/h
-				var correctedWind = convertWindSpeed(data.wind.speed,'m/s');
-				// convert metric to imperial: km/h -> mph
-				var winds = [
-					correctedWind,
-					convertWindSpeed(correctedWind,'mph')
-				];
-
-				var weatherHere = new Weather('here',place,temps,data.weather[0].main,winds);
-			});
+	var decipherCoordinates = function() {
+		if(navigator.geolocation) {
+			var options = {
+				success: function(pos) {
+					getLocation('here',[pos.coords.latitude,pos.coords.longitude]);
+				}
+			}
+			navigator.geolocation.getCurrentPosition(options.success);
 		}
 	};
 
-	var getSuckyWeather = () => {
-		$.get('/weather/worse').then((data) => {
-			var place = ['South Pole', 'Antarctica'];
-
-			// Dark Sky return temperature in Celsius.
-			var temps = [
-				data.temperature,
-				convertTemp('fahr',data.temperature)
-			];
-
-			// Dark Sky returns wind speed in m/s
-			var correctedWind = convertWindSpeed(data.windSpeed,'m/s');
-			var winds = [
-				correctedWind,
-				convertWindSpeed(correctedWind,'mph')
-			];
-
-			var weatherWorse = new Weather('worse',place,temps,data.summary,winds);
+	var getQuery = (route,pos) => {
+		var query = '/weather'+route;
+		$.get(query).then((response) => {
+			getWeather(response);
 		});
 	};
 
-	getLocation();
-	getSuckyWeather();
+	var getWeather = (data,pos) => {
+		console.log(data);
+		// $.get('/weather'+query).then((response) => {
+			// console.log(response);
+			// if(pos=='here') {
+			// 	var place = [response.location.city, response.location.state_abbr, response.location.zipcode];
+			// } else if(pos=='worse') {
+			// 	var place = ['South Pole', 'Antarctica', 'Amundsen-Scott Research Station'];
+			// }
+
+			// var temps = [
+			// 	response.data.temperature,
+			// 	convertTemp('fahr', response.data.temperature)
+			// ];
+
+			// var correctedWind = convertWindSpeed(response.data.wind.speed, 'm/s');
+			// var winds = [
+			// 	correctedWind,
+			// 	convertWindSpeed(correctedWind, 'mph')
+			// ];
+
+			// var weather = new Weather(pos, place, temps, response.data.summary, winds);
+		// });
+	};
+
+	decipherCoordinates();
+	getLocation('worse');
 });
