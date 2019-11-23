@@ -10,13 +10,13 @@ $(document).ready(function() {
 		};
 		// this.temp=[fahrenheit,celsius]
 		this.temp = {
-			celsius: data.temp[0],
-			fahrenheit: data.temp[1]
+			celsius: data.temp[1],
+			fahrenheit: data.temp[0]
 		};
 		this.sky = data.sky;
 		this.windspeed = {
-			kmph: data.wind[0],
-			mph: data.wind[1]
+			kmph: data.wind[1],
+			mph: data.wind[0]
 		};
 	};
 
@@ -47,7 +47,7 @@ $(document).ready(function() {
 			return parseFloat((a-32)*(5/9)).toFixed(1);
 		} else if(desiredUnit=="fahr") {
 			// celsius -> fahrenheit
-			return parseFloat(a*(9/5)+32).toFixed(1);
+			return parseFloat(a*9/5+32).toFixed(1);
 		}
 	}
 
@@ -101,16 +101,20 @@ $(document).ready(function() {
 		// get weather data
 		$.get(query).then((response) => {
 
+			// console.log(response);
+
 			// correct data units to desirable units
 			var correctedWind = convertWindSpeed(response.data.windSpeed, 'm/s');
 
 			// organize data
 			var data = {
 				place: location,
-				temp: [response.data.temperature, convertTemp('fahr', response.data.temperature)],
+				temp: [response.data.temperature, convertTemp('cel', response.data.temperature)],
 				sky: response.data.summary,
 				wind: [correctedWind, convertWindSpeed(correctedWind, 'mph')]
 			};
+
+			console.log(data);
 
 			var weather = new Weather(data);
 			weather.writePage(pos);

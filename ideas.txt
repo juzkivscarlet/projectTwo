@@ -14,16 +14,9 @@ User calendar for stressful events coming up.
 - Create events with selection of reasons why the events are stressful.
 - Inspirational quote will be tailored to stress reasons.
 
-Weather:
-- Weather at current location
-- Weather at selected location
-- Weather "where it's better" (start with hardcoded: Honolulu, HI)
-- Weather "where it's worse" (start with hardcoded: Antarctica)
-
 Quote of the day for inspiration, based on future stressors.
 
 Word of the day.
-Dad joke of the day.
 Wholesome / amusing / cute GIFs
 Wholesome / amusing / cute Reddit threads.
 
@@ -37,3 +30,14 @@ Dad Jokes - icanhazdadjoke.com/api
 calendar - ?
 Astrology - 
 Weather: openWeather
+
+FINISHED:
+
+Weather:
+- Weather at current location
+- Weather at selected location
+- Weather "where it's better" (start with hardcoded: Honolulu, HI)
+- Weather "where it's worse" (start with hardcoded: Antarctica)
+
+
+Dad joke of the day.
