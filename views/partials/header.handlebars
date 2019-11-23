@@ -14,7 +14,7 @@
 
 	{{!-- Navbar links --}}
 	<div class="collapse navbar-collapse" id="navbar-links">
-		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		<ul class="navbar-nav mr-auto">
 			{{!-- Links for Dashboard (Homepage), /amusing, & /interesting --}}
 
 			<li class="nav-item">
@@ -30,13 +30,23 @@
 			{{!-- Mobile: account dropdown link --}}
 			<li class="nav-item dropdown d-block d-lg-none d-xl-none">
 				<a class="nav-link dropdown-toggle" href="" id="nav-dropdown-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					&darr; account
+					&darr; 
+					{{#if user}}
+						hello, <span class="user-name">{{user.name}}</span>!
+					{{else}}
+						account
+					{{/if}}
 				</a>
 				{{!-- Dropdown content --}}
 				<div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="nav-dropdown-link">
 					<h6 class="dropdown-header">hello!</h6>
-					<button type="button" class="dropdown-item" data-toggle="modal" data-target="#signup-modal">signup</button>
-					<button type="button" class="dropdown-item" data-toggle="modal" data-target="#login-modal">login</button>
+
+					{{#if user}}
+						<a href="/logout" class="dropdown-item">logout</a>
+					{{else}}
+						<button type="button" class="dropdown-item" data-toggle="modal" data-target="#signup-modal">signup</button>
+						<button type="button" class="dropdown-item" data-toggle="modal" data-target="#login-modal">login</button>
+					{{/if}}
 				</div>
 			</li>
 		</ul>
@@ -45,13 +55,24 @@
 	{{!-- Destop: account dropdown button --}}
 	<div class="dropdown d-none d-lg-block" id="nav-dropdown">
 		<button class="btn btn-outline-light dropdown-toggle" type="button" id="nav-dropdown-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			&darr; account
+			&darr; 
+			{{#if user}}
+				hello, <span class="user-name">{{user.name}}</span>!
+			{{else}}
+				account
+			{{/if}}
 		</button>
 		{{!-- Dropdown content --}}
 		<div class="dropdown-menu dropdown-menu-right text-right" aria-labelledby="nav-dropdown-btn" id="nav-dropdown-content">
 			<h6 class="dropdown-header">hello!</h6>
-			<button type="button" class="dropdown-item" data-toggle="modal" data-target="#signup-modal">create new account</button>
-			<button class="dropdown-item" type="button" data-toggle="modal" data-target="#login-modal">login</a>
+
+			{{#if user}}
+				<a href="/logout" class="dropdown-item">logout</a>
+			{{else}}
+				{{!-- User isn't logged in, display: --}}
+				<button type="button" class="dropdown-item" data-toggle="modal" data-target="#signup-modal">create new account</button>
+				<button type="button" class="dropdown-item" data-toggle="modal" data-target="#login-modal">login</a>
+			{{/if}}
 		</div>
 	</div>
 

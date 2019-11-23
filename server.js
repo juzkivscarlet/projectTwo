@@ -56,7 +56,7 @@ require('./controllers/api-users.js')(app);
 require('./controllers/external-api.js')(app);
 
 // Listener & sequelize
-db.sequelize.sync({force:true}).then(function() {
+db.sequelize.sync().then(function() {
     app.listen(PORT, function() {
         console.log("http://localhost:"+PORT);
     });

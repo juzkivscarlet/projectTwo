@@ -3,12 +3,11 @@
 @media only screen and (max-width: 800px) {
 	/* Style HTML elements */
 	nav, footer {
-		position: absolute;
 		background-color: #559;
 		color: white;
 	}
 	nav {
-		height: 8%;
+		height: auto;
 		margin-top: auto;
 		margin-bottom: auto;
 	}
@@ -34,6 +33,9 @@
 	}
 	li.nav-item {
 		font-style: italic;
+	}
+	#navbar-links {
+		background-color: #559;
 	}
 
 	/* Navbar dropdown classes styling */

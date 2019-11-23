@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+	// get user's first name when logged in, display in navbar
+	if($(".user-name")) {
+		var name = $(".user-name").text();
+		name = name.slice(0,name.indexOf(" ")).toLowerCase();
+		$(".user-name").text(name);
+	}
+
 	// add on 'hover' listener to Account Button dropdown menu, with sliding animations.
 	$("#nav-dropdown-btn").hover(() => {
 		$("#nav-dropdown-content").slideDown(500);

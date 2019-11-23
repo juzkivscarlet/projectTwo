@@ -12,7 +12,10 @@ module.exports = function(app) {
 
 	// POST request for login
 	app.post("/login", passport.authenticate("local"), (req,res) => {
-		res.json(req.user);
+		req.login(req.user, (err) => {
+			if(err) return console.log(err);
+			res.json(req.user);
+		});
 	});
 
 	// POST request for /signup
@@ -35,7 +38,7 @@ module.exports = function(app) {
 
 	// GET request for logout
 	app.get("/logout", (req,res) => {
-		res.logout();
+		req.logout();
 		// redirect to homepage
 		res.redirect("/");
 	});
