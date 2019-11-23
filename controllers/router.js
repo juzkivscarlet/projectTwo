@@ -11,7 +11,6 @@ module.exports = function(app) {
 				isHome: true,
 				route: 'dashboard'
 			});
-			console.log(req.user);
 		} else {
 			res.render("index", {
 				user: req.user,

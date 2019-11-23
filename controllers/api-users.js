@@ -43,6 +43,22 @@ module.exports = function(app) {
 		res.redirect("/");
 	});
 
+	app.get("/events", (req,res) => {
+		if(req.user) {
+			db.Events.findAll({
+				where: {
+					name: req.user.name
+				}
+			}).then(() => {
+
+			}).catch((err) => {
+				res.status(401).json(err);
+			});
+		} else {
+			res.json({});
+		}
+	});
+
 	// Route for user data
 	app.get("/api/user_data", (req,res) => {
 		// if user isn't logged in, return empty JSON object
