@@ -3,16 +3,13 @@ const readline = require('readline');
 const {google} = require('googleapis');
 
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
-const TOKEN_PATH = 'config/token.json';
-
-fs.readFile('config/credentials.js', (err,content) => {
-    if(err) throw err;
-    authorize(JSON.parse(content), listEvents);
-});
+const TOKEN_PATH = './token.json';
 
 function authorize(credentials, callback) {
-    const {client_secret, client_id, redirect_uris} = credentials.installed;
-    const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+    console.log(credentials);
+    const {client_secret, client_id} = credentials.web;
+    const redirect_uri = "https://mattjuskiw.github.io/";
+    const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uri);
 
     fs.readFile(TOKEN_PATH, (err,token) => {
         if(err) return getAccessToken(oAuth2Client, callback);
@@ -67,3 +64,15 @@ function listEvents(auth) {
         }
     });
 }
+
+module.exports = {
+    run: function() {
+        fs.readFile('config/credentials.json', (err,content) => {
+            if(err) throw err;
+            this.authorize(JSON.parse(content), listEvents);
+        });
+    },
+    authorize: authorize,
+    getAccessToken: getAccessToken,
+    listEvents: listEvents
+};

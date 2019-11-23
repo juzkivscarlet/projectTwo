@@ -6,6 +6,7 @@ var db = require('../models');
 // Import node.js modules
 var bcrypt = require('bcryptjs');
 var passport = require('../config/passport.js');
+var calendar = require('../config/google');
 require('dotenv').config();
 
 module.exports = function(app) {
@@ -55,5 +56,9 @@ module.exports = function(app) {
 				id: req.user.id
 			});
 		}
+	});
+
+	app.get('/google/calendar', (req,res) => {
+		// calendar.run();
 	});
 };
