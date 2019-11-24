@@ -5,3 +5,5 @@ package-lock.json
 config/credentials.json
 config/credentials.js
 config/token.json
+
+.vs/
