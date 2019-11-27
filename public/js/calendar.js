@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
 	// GLOBAL VARIABLES
+
 	// today
 	var today = new Date();
 	// array for Days of the week, since function Date().getDay() returns numbers 0-6.
@@ -20,11 +21,9 @@ $(document).ready(function() {
 		// method to write appropriate layout for the month
 		this.writeLayout = function() {
 			var n;
-			if(month.dateLayout.rowSix.length!=0) n = 6;
-			else if(month.dateLayout.rowFive.length==0) n =4;
+			if(month.dateLayout.rowSix[0]!=null) n = 6;
+			else if(month.dateLayout.rowFive[0]==null) n =4;
 			else n = 5;
-
-			console.log(n);
 	
 			for(var i=0; i<n; i++) {
 				var addedRow = $("<tr>").attr('id',`cal-row${i+1}`);
@@ -42,6 +41,7 @@ $(document).ready(function() {
 			var lastRow;
 			var middleRows = [];
 			var lastRowDOM = new Array(7);
+
 			if(weeks==4) {
 				lastRow = month.dateLayout.rowFour;
 				middleRows.push(month.dateLayout.rowTwo, month.dateLayout.rowThree);
@@ -57,16 +57,26 @@ $(document).ready(function() {
 				lastRowDOM[i] = $(`#cal-row${weeks}-col${i+1}`);
 			}
 
-			// write first week
+			var rows = [month.dateLayout.rowOne, middleRows, lastRow];
+			this.writeDate(rows, lastRowDOM, weeks);
+		};
+		
+		this.writeDate = function(rows, lastRowDOM, weeks) {
+
 			for(var i=0; i<7; i++) {
-				if(month.dateLayout.rowOne[i]) $(`#cal-row1-col${i+1}`).text(month.dateLayout.rowOne[i]);
-				if(lastRow[i]) lastRowDOM[i].text(lastRow[i]);
-				for(var j=1; j<(weeks-1); j++) {
-					$(`#cal-row${j+1}-col${i+1}`).text(middleRows[j-1][i]);
+				if(month.dateLayout.rowOne[i]) {
+					$(`#cal-row1-col${i+1}`).html(`<span>${rows[0][i]}</span></br>`);
 				}
+				if(rows[2][i]) {
+					lastRowDOM[i].html(`<span>${rows[2][i]}</span></br>`);
+				}
+				for(var j=1; j<(weeks-1); j++) {
+					$(`#cal-row${j+1}-col${i+1}`).html(`<span>${rows[1][j-1][i]}</span></br>`);
+				}
+
 			}
 		};
-
+		
 	};
 
 	// Month constructor
@@ -88,7 +98,7 @@ $(document).ready(function() {
 			rowFive: dates.slice(28,35),
 			rowSix: dates.slice(35)
 		};
-		console.log(this);
+		// console.log(this);
 	};
 
 	// Get correct number of days in said month
@@ -99,7 +109,7 @@ $(document).ready(function() {
 		var days;
 
 		// month indeces with 31 days: 0,2,4,6, 7,9,11.
-		// month indeces with 30 days: 1,3,5, 8,10.
+		// month indeces with 30 days: 3,5, 8,10.
 		// February = 28, unless year is divisible by 4 (leap year), then 29.
 
 		if(n <= 6 && n != 1) {
@@ -115,19 +125,56 @@ $(document).ready(function() {
 		return days;
 	};
 
+	// ON-CLICK FUNCTIONS FOR CALENDAR (Navigation)
+
+	$("#month-prev").on('click', () => {
+		changeMonth("prev");
+	});
+
+	$("#month-next").on('click', () => {
+		changeMonth("next");
+	});
+
+	function changeMonth(direction) {
+		var oldMonth = months.indexOf($("#month").text());
+		var year = parseInt($("#year").text());
+
+		var newMonth;
+		if(direction=="prev") {
+			// if going back from January to December, newMonth=December & year -= 1
+			if(oldMonth==0) {
+				newMonth = months[11];
+				year--;
+			} else newMonth = months[oldMonth-1];
+		} else if(direction=="next") {
+			// if going forward from December to January, newMonth=January & year += 1
+			if(oldMonth==11) {
+				newMonth = months[0];
+				year++;
+			} else newMonth = months[oldMonth+1];
+		}
+
+		var firstDay = new Date(`${newMonth} 1, ${year}`);
+		initCalendar(firstDay);
+	}
+
+	// ON-CLICK FUNCTIONS FOR ACTIONS
 	
 	// STARTUP
 
-	function initCalendarToday() {
-		var currentMonth = new Month(months[today.getMonth()], today.getFullYear());
+	function initCalendar(day) {
 
-		$("#month").text(currentMonth.name);
-		$("#year").text(today.getFullYear());
+		$("#calendar tbody").empty();
 
-		var todayCalendar = new Calendar(currentMonth);
-		todayCalendar.writeLayout();
+		var theMonth = new Month(months[day.getMonth()], day.getFullYear());
+
+		$("#month").text(theMonth.name);
+		$("#year").text(day.getFullYear());
+
+		var theCalendar = new Calendar(theMonth);
+		theCalendar.writeLayout();
 	}
 
-	initCalendarToday();
+	initCalendar(today);
 	
 });
