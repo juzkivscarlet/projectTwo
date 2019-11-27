@@ -1,6 +1,6 @@
 /* STYLESHEET FOR MOBILE VIEWERS */
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 999px) {
 	/* Style HTML elements */
 	nav, footer {
 		background-color: #559;

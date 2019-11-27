@@ -1,6 +1,6 @@
 /* STYLESHEET FOR DESKTOP VIEWERS */
 
-@media only screen and (min-width: 801px) {
+@media only screen and (min-width: 1000px) {
 	/* Style HTML elements */
 	body {
 		font-family: "Ubuntu", sans-serif;
@@ -75,6 +75,6 @@
 	}
 
 	#calendar {
-		height: 800px;
+		height: auto;
 	}
 }
