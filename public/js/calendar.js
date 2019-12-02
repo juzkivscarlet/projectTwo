@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
 
 	// GLOBAL VARIABLES
@@ -125,6 +127,17 @@ $(document).ready(function() {
 		return days;
 	};
 
+	// Event constructor
+	var Event = function(title, location, startDateObj, endDateObj, desc) {
+		this.title = title;
+		this.location = location;
+
+		this.startDate = `${startDateObj.year}-${startDateObj.month}-${startDateObj.day}`;
+		this.endDate = `${endDateObj.year}-${endDateObj.month}-${endDateObj.day}`;
+
+		this.desc = desc;
+	};
+
 	// ON-CLICK FUNCTIONS FOR CALENDAR (Navigation)
 
 	$("#month-prev").on('click', () => {
@@ -133,6 +146,10 @@ $(document).ready(function() {
 
 	$("#month-next").on('click', () => {
 		changeMonth("next");
+	});
+
+	$("#month-today").on('click', () => {
+		initCalendar(today);
 	});
 
 	function changeMonth(direction) {
@@ -159,6 +176,86 @@ $(document).ready(function() {
 	}
 
 	// ON-CLICK FUNCTIONS FOR ACTIONS
+
+	
+	// ADD-EVENT MODAL
+	$("#add-event-btn").on('click', (e) => {
+		e.preventDefault();
+		addEvent();
+	});
+
+	function addEvent() {
+		var startDate = {
+			month: parseInt($("#start-month-picker").val())+1,
+			day: $("#start-day-picker").val(),
+			year: $("#start-year-picker").val()
+		};
+		if(startDate.month<10) startDate.month = "0"+startDate.month;
+		if(startDate.day<10) startDate.day = "0"+startDate.day;
+
+		var endDate;
+		if($("#no-end-date").prop('checked')) {
+			endDate = startDate;
+		} else {
+			endDate = {
+				month: parseInt($("#end-month-picker").val())+1,
+				day: $("#end-day-picker").val(),
+				year: $("#end-year-picker").val()
+			};
+			if(endDate.month<10) endDate.month = "0"+endDate.month;
+			if(endDate.day<10) endDate.day = "0"+endDate.day;
+		}
+
+		var eventInfo = new Event($("#event-title").val().trim(), $("#event-location").val().trim(), startDate, endDate, $("#event-desc").val().trim());
+
+		$.post("/events/add", eventInfo).then(() => {
+			window.location.replace("/");
+		}).catch();
+	}
+
+	// date picker
+	function loadDatePickers(month,day,year,which) {
+		if(which=="start") toggleEndDate(false);
+		else if(which=="end") toggleEndDate(true);
+
+		for(var i=0; i<months.length; i++) {
+			month.append($("<option>").attr('value',i).text(months[i]));
+		}
+		month.on('change', () => {
+			// if month is selected (not default value)
+			if(month.val()) {
+				var selectedMonth = new Month(months[month.val()], 2019);
+				day.empty();
+				for(var j=0; j<selectedMonth.numDays; j++) {
+					day.append($("<option>").attr('value',(j+1)).text(j+1));
+				}
+				year.val(today.getFullYear());
+				checkDates();
+			}
+		});
+		for(var i=0; i<6; i++) {
+			year.append($("<option>").attr('value',2019+i).html(2019+i));
+		}
+	}
+
+	function checkDates() {
+		loadDatePickers($("#end-month-picker"), $("#end-day-picker"), $("#end-year-picker"), "end");
+		$("#no-end-date").on('change', () => {
+			toggleEndDate(false);
+		});
+	}
+
+	function toggleEndDate(enabled) {
+		if(!enabled) {
+			$("#end-month-picker").val($("#start-month-picker").val()).change().attr('disabled',true);
+			$("#end-day-picker").val($("#start-day-picker").val()).change().attr('disabled',true);
+			$("#end-year-picker").val($("#start-year-picker").val()).change().attr('disabled',true);
+		} else {
+			$("#end-month-picker").attr('disabled',false);
+			$("#end-day-picker").attr('disabled',false);
+			$("#end-year-picker").attr('disabled',false);
+		}
+	}
 	
 	// STARTUP
 
@@ -176,5 +273,9 @@ $(document).ready(function() {
 	}
 
 	initCalendar(today);
+	loadDatePickers($("#start-month-picker"), $("#start-day-picker"), $("#start-year-picker"), "start");
+
+	// load tooltips
+	$('[data-toggle="tooltip"]').tooltip();
 	
 });

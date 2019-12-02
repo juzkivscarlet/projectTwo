@@ -1,5 +1,6 @@
 .env
 node_modules/
+public/test.html
 
 package-lock.json
 config/credentials.json
@@ -7,3 +8,5 @@ config/credentials.js
 config/token.json
 
 .vs/
+.DS_Store
+views/.DS_Store

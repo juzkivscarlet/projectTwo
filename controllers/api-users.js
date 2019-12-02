@@ -59,6 +59,10 @@ module.exports = function(app) {
 		}
 	});
 
+	app.post("/events/add", (req,res) => {
+		console.log(req.body);
+	});
+
 	// Route for user data
 	app.get("/api/user_data", (req,res) => {
 		// if user isn't logged in, return empty JSON object

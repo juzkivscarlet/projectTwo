@@ -1,29 +1,119 @@
 {{!-- ADD EVENT MODAL --}}
 
 <div class="modal fade" id="add-event-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+	<div class="modal-dialog modal-lg" role="document">
 
-        <div class="modal-content">
+		<div class="modal-content">
 
-            {{!-- Modal Header --}}
-            <div class="modal-header">
-                <h5 class="modal-title">add an event</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+			{{!-- Modal Header --}}
+			<div class="modal-header">
+				<h5 class="modal-title">add an event</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-            </div>
+			</div>
 
-            {{!-- Modal Body --}}
-            <div class="modal-body">
+			{{!-- Modal Body --}}
+			<div class="modal-body">
+				<form class="form-horizontal container" action="/events/add" id="add-event-form">
+				
+					{{!-- Event title --}}
+					<div class="form-group row">
+						<label class="control-label col-sm-4" for="event-title">*event title: </label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="event-title" placeholder="title" required>
+						</div>
+					</div>
 
-            </div>
+					{{!-- Event location --}}
+					<div class="form-group row">
+						<label class="control-label col-sm-4" for="event-location">location: </label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="event-location" placeholder="location (optional)">
+						</div>
+					</div>
 
-            {{!-- Modal footer --}}
-            <div class="modal-footer">
+					{{!-- Dates --}}
+					<div class="form-group">
+
+						<div class="row">
+							{{!-- Start date --}}
+							<div class="col-sm-6">
+								<label class="control-label" for="start-datepick">start date: <small class="text-muted font-italic">(m-d-y)</small> </label>
+								<div class="input-group" id="start-datepick">
+									
+									<select class="custom-select" id="start-month-picker">
+										<option selected>month</option>
+									</select>
+
+									<select class="custom-select" id="start-day-picker">
+										<option selected>day</option>
+									</select>
+
+									<select class="custom-select" id="start-year-picker">
+										<option selected>year</option>
+									</select>
+									
+								</div>
+							</div>
+
+							{{!-- End date --}}
+							<div class="col-sm-6">
+								<label class="control-label" for="end-datepick">end date: </label>
+								<div class="input-group" id="end-datepick">
+									
+									<select class="custom-select" id="end-month-picker">
+										<option selected>month</option>
+									</select>
+
+									<select class="custom-select" id="end-day-picker">
+										<option selected>day</option>
+									</select>
+
+									<select class="custom-select" id="end-year-picker">
+										<option selected>year</option>
+									</select>
+
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="no-end-date">
+									<label class="form-check-label" for="no-end-date">
+										this event occurs on only one date 
+										<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="if checked, this event will only occur on the start date you selected."></i>
+									</label>
+								</div>
+							</div>
+						</div>
+
+						{{!-- Frequency --}}
+						<div class="row">
+
+						</div>
+
+					</div>
+
+					{{!-- Event description --}}
+					<div class="form-group row">
+						<label class="control-label col-sm-4" for="event-desc">why is this stress-inducing?: </label>
+						<div class="col-sm-8">
+							<textarea type="text" class="form-control" id="event-desc" placeholder="description (optional)"></textarea>
+						</div>
+					</div>
+
+					{{!-- Submit, add event --}}
+					<div class="text-center">
+						<button type="submit" class="btn btn-primary" id="add-event-btn">add event</button>
+					</div>
+
+				</form>
+			</div>
+
+			{{!-- Modal footer --}}
+			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
 			</div>
 
-        </div>
+		</div>
 
-    </div>
+	</div>
 </div>
