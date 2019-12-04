@@ -9,19 +9,19 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         dateBegin: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.STRING,
             allowNull: true
         },
         dateEnd: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.STRING,
             allowNull: true
         },
         timeBegin: {
-            type: DataTypes.TIME,
+            type: DataTypes.STRING,
             allowNull: true
         },
         timeEnd: {
-            type: DataTypes.TIME,
+            type: DataTypes.STRING,
             allowNull: true
         },
         frequency: {
@@ -37,10 +37,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         }
     });
-
-    Events.setAllDay = function() {
-        console.log("test");
-    };
 
     return Events;
 };

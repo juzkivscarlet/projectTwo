@@ -6,3 +6,11 @@
 html, body {
 	height: 100%;
 }
+
+#add-event-form .control-label {
+	font-weight: bold;
+}
+
+#event-daypicker {
+	display: none;
+}

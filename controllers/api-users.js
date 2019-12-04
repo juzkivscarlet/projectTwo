@@ -59,8 +59,24 @@ module.exports = function(app) {
 		}
 	});
 
-	app.post("/events/add", (req,res) => {
+	app.post("/events/add", async(req,res) => {
+
+		console.log(req.user);
 		console.log(req.body);
+
+		db.Events.create({
+			user: req.user.name,
+			title: req.body.title,
+			dateBegin: req.body.dateBegin,
+			dateEnd: req.body.dateEnd,
+			timeBegin: req.body.timeBegin,
+			timeEnd: req.body.timeEnd,
+			location: req.body.location,
+			frequency: req.body.frequency,
+			description: req.body.desc
+		}).then(() => {
+			res.redirect("/");
+		});
 	});
 
 	// Route for user data

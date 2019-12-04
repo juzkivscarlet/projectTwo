@@ -31,7 +31,9 @@
 						<div class="col-sm-8">
 							<input type="text" class="form-control" id="event-location" placeholder="location (optional)">
 						</div>
-					</div>
+                    </div>
+                    
+                    <hr class="my-4">
 
 					{{!-- Dates --}}
 					<div class="form-group">
@@ -55,6 +57,49 @@
 									</select>
 									
 								</div>
+
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="event-allday">
+									<label class="form-check-label" for="event-allday">
+										this event is an all-day event. 
+									</label>
+                                </div>
+                                
+                                <br><br>
+
+								<div class="input-group" id="start-timepick">
+                                    
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">start time</span>
+                                    </div>
+
+									<input type="number" class="form-control" min="1" max="12" step="1" id="start-time-hour">
+									<input type="number" class="form-control" min="0" max="55" step="5" id="start-time-min">
+
+									<select class="custom-select" id="start-time-ampm">
+										<option value="am">AM</option>
+										<option value="pm">PM</option>
+									</select>
+
+                                </div>
+                                
+                                <br>
+
+								<div class="input-group" id="end-timepick">
+                                    
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">end time</span>
+                                    </div>
+
+									<input type="number" class="form-control" min="1" max="12" step="1" id="end-time-hour">
+									<input type="number" class="form-control" min="0" max="55" step="5" id="end-time-min">
+
+									<select class="custom-select" id="end-time-ampm">
+										<option value="am">AM</option>
+										<option value="pm">PM</option>
+									</select>
+
+								</div>
 							</div>
 
 							{{!-- End date --}}
@@ -75,6 +120,7 @@
 									</select>
 
 								</div>
+
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="no-end-date">
 									<label class="form-check-label" for="no-end-date">
@@ -82,13 +128,70 @@
 										<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="if checked, this event will only occur on the start date you selected."></i>
 									</label>
 								</div>
+
 							</div>
-						</div>
+                        </div>
+                        
+                        <hr class="my-4">
 
 						{{!-- Frequency --}}
-						<div class="row">
+						<div class="row" id="event-freq-div">
 
-						</div>
+                            <div class="col-sm-4">
+                                <label class="control-label">frequency: </label>
+                            </div>
+                            
+                            <div class="col-sm-4 form-check">
+                                <input class="form-check-input" type="checkbox" id="event-hasfreq">
+                                <label class="form-check-label" for="event-hasfreq">event repeats.</label>
+                            </div>
+
+							<div class="col-sm-4 input-group" id="event-freq-picker">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">every</span>
+                                </div>
+								
+								<select class="custom-select" id="event-freq">
+									<option value="monthly">month</option>
+									<option value="weekly">week</option>
+									<option value="biweekly">2 weeks</option>
+									<option value="weekdays">certain weekdays</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="row mx-auto text-center" id="event-daypicker">
+                                <br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="event-sun" value="sun">
+                                    <label class="form-check-label" for="event-sun">sun</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="event-mon" value="mon">
+                                    <label class="form-check-label" for="event-mon">mon</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="event-tues" value="tues">
+                                    <label class="form-check-label" for="event-tues">tues</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="event-wed" value="wed">
+                                    <label class="form-check-label" for="event-wed">wed</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="event-thur" value="thur">
+                                    <label class="form-check-label" for="event-thur">thur</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="event-fri" value="fri">
+                                    <label class="form-check-label" for="event-fri">fri</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="event-sat" value="sat">
+                                    <label class="form-check-label" for="event-sat">sat</label>
+                                </div>
+                            </div>
 
 					</div>
 

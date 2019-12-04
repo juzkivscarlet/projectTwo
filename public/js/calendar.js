@@ -85,7 +85,7 @@ $(document).ready(function() {
 	var Month = function(name, year) {
 		this.name = name;
 		this.year = year;
-		this.numDays = this.numberOfDays(name);
+		this.numDays = this.numberOfDays(name,year);
 		var firstDay = new Date(`${name} 1, ${year}`).getDay();
 
 		var dates = new Array(42);
@@ -104,7 +104,7 @@ $(document).ready(function() {
 	};
 
 	// Get correct number of days in said month
-	Month.prototype.numberOfDays = function(name) {
+	Month.prototype.numberOfDays = function(name,year) {
 		var n = months.indexOf(months.find((month) => {
 			return month == name;
 		}));
@@ -121,22 +121,37 @@ $(document).ready(function() {
 			if(n%2==0) days = 30;
 			else days = 31;
 		} else if(n == 1) {
-			if(new Date().getFullYear()%4==0) days = 29;
+			if(year%4==0) days = 29;
 			else days = 28;
 		}
 		return days;
 	};
 
 	// Event constructor
-	var Event = function(title, location, startDateObj, endDateObj, desc) {
+	var Event = function(title, location, startDateObj, endDateObj, startTime, endTime, freq, desc) {
 		this.title = title;
 		this.location = location;
 
-		this.startDate = `${startDateObj.year}-${startDateObj.month}-${startDateObj.day}`;
-		this.endDate = `${endDateObj.year}-${endDateObj.month}-${endDateObj.day}`;
+		this.dateBegin = `${startDateObj.year}-${startDateObj.month}-${startDateObj.day}`;
+		this.dateEnd = `${endDateObj.year}-${endDateObj.month}-${endDateObj.day}`;
+
+		this.timeBegin = formatTime(startTime);
+		this.timeEnd = formatTime(endTime);
+		this.frequency = freq.join(",");
 
 		this.desc = desc;
 	};
+
+	function formatTime(time) {
+		// time[0] = hours, time[1] = minutes, time[2] = AM/PM
+		var hour = time[0];
+		var min = time[1];
+		var ampm = time[2];
+
+		if(min<10) min = "0"+min;
+
+		return hour+":"+min+" "+ampm;
+	}
 
 	// ON-CLICK FUNCTIONS FOR CALENDAR (Navigation)
 
@@ -206,7 +221,25 @@ $(document).ready(function() {
 			if(endDate.day<10) endDate.day = "0"+endDate.day;
 		}
 
-		var eventInfo = new Event($("#event-title").val().trim(), $("#event-location").val().trim(), startDate, endDate, $("#event-desc").val().trim());
+		var startTime = [$("#start-time-hour").val(), $("#start-time-min").val(), $("#start-time-ampm").val()];
+
+		var endTime = [$("#end-time-hour").val(), $("#end-time-min").val(), $("#end-time-ampm").val()];
+
+		var freq;
+		if($("#event-hasfreq").prop('checked')) {
+			if($("#event-freq").val()=="monthly") freq = ['monthly'];
+			else if($("#event-freq").val()=="weekly") freq = ['weekly'];
+			else if($("#event-freq").val()=="biweekly") freq = ['biweekly'];
+			else if($("#event-freq").val()=="weekdays") {
+				var weekdays=[$("#event-sun"), $("#event-mon"), $("#event-tues"), $("#event-wed"), $("#event-thur"), $("#event-fri"), $("#event-sat")];
+				for(var i=0; i<weekdays.length; i++) {
+					if(weekdays[i].prop('checked')) freq.push(weekdays[i].attr('value'));
+				}
+			}
+
+		} else freq = ['none'];
+
+		var eventInfo = new Event($("#event-title").val().trim(), $("#event-location").val().trim(), startDate, endDate, startTime, endTime, freq, $("#event-desc").val().trim());
 
 		$.post("/events/add", eventInfo).then(() => {
 			window.location.replace("/");
@@ -238,13 +271,16 @@ $(document).ready(function() {
 		}
 	}
 
+	// enable #end-date-picker, check for changes for #no-end-date
 	function checkDates() {
 		loadDatePickers($("#end-month-picker"), $("#end-day-picker"), $("#end-year-picker"), "end");
 		$("#no-end-date").on('change', () => {
-			toggleEndDate(false);
+			if($("#no-end-date").prop('checked')) toggleEndDate(false);
+			else toggleEndDate(true);
 		});
 	}
 
+	// if event only occurs on one date, disable #event-date-picker
 	function toggleEndDate(enabled) {
 		if(!enabled) {
 			$("#end-month-picker").val($("#start-month-picker").val()).change().attr('disabled',true);
@@ -256,7 +292,54 @@ $(document).ready(function() {
 			$("#end-year-picker").attr('disabled',false);
 		}
 	}
+
+	// if event is all-day, disable start-time-picker & end-time-picker
+	$("#event-allday").on('change', () => {
+		if($("#event-allday").prop("checked")) toggleAllDayEvent(false);
+		else toggleAllDayEvent(true);
+	});
+
+	function toggleAllDayEvent(enabled) {
+		if(!enabled) {
+			$("#start-time-hour").val(12).change().attr('disabled',true);
+			$("#start-time-min").val(0).change().attr('disabled',true);
+			$("#start-time-ampm").val("am").change().attr('disabled',true);
+
+			$("#end-time-hour").val(11).change().attr('disabled',true);
+			$("#end-time-min").val(55).change().attr('disabled',true);
+			$("#end-time-ampm").val("pm").change().attr('disabled',true);
+		} else {
+			$("#start-time-hour").attr('disabled',false);
+			$("#start-time-min").attr('disabled',false);
+			$("#start-time-ampm").attr('disabled',false);
+
+			$("#end-time-hour").attr('disabled',false);
+			$("#end-time-min").attr('disabled',false);
+			$("#end-time-ampm").attr('disabled',false);
+		}
+	}
+
+	// if event repeats, enable #event-freq
+	$("#event-hasfreq").on('change', () => {
+		if($("#event-hasfreq").prop('checked')) toggleEventFrequency(true);
+		else toggleEventFrequency(false);
+	});
 	
+	function toggleEventFrequency(enabled) {
+		if(!enabled) {
+			$("#event-freq").attr('disabled',true);
+			$("#event-daypicker").css('display','none');
+		} else {
+			$("#event-freq").attr('disabled',false);
+			if($("#event-freq").val()=="weekdays") $("#event-daypicker").css('display','block');
+		}
+	}
+
+	$("#event-freq").on('change', () => {
+		if($("#event-freq").val()=="weekdays") $("#event-daypicker").css('display','block');
+		else $("#event-daypicker").css('display','none');
+	});
+
 	// STARTUP
 
 	function initCalendar(day) {
@@ -271,6 +354,8 @@ $(document).ready(function() {
 		var theCalendar = new Calendar(theMonth);
 		theCalendar.writeLayout();
 	}
+
+	toggleEventFrequency(false);
 
 	initCalendar(today);
 	loadDatePickers($("#start-month-picker"), $("#start-day-picker"), $("#start-year-picker"), "start");
