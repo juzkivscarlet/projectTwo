@@ -1,6 +1,57 @@
-<div class="text-center">
-	<h1>Dad Joke!</h1>
-	<p id="dad-joke"></p>
+<div class="row">
+
+	<div class="col-md-6 text-center">
+		<h1>Dad Joke!</h1>
+		<p id="dad-joke"></p>
+	</div>
+
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-header">astrology</div>
+
+			<div class="card-body">
+				<h5 class="card-title">today's horoscope</h5>
+				<form class="card-text">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">your sign</span>
+						</div>
+						<select class="form-control" id="astro-sign">
+							<option selected>sign...</option>
+							<option value="aquarius">aquarius</option>
+							<option value="pisces">pisces</option>
+							<option value="aries">aries</option>
+							<option value="taurus">taurus</option>
+							<option value="gemini">gemini</option>
+							<option value="cancer">cancer</option>
+							<option value="leo">leo</option>
+							<option value="virgo">virgo</option>
+							<option value="libra">libra</option>
+							<option value="scorpio">scorpio</option>
+							<option value="sagittarius">sagittarius</option>
+							<option value="capricorn">capricorn</option>
+						</select>
+					</div>
+
+					<div class="text-center">
+						<br>
+						<button type="submit" class="btn btn-primary" id="astro-btn">submit</button>
+					</div>
+				</form>
+			</div>
+
+			<hr class="my-4">
+
+			<div class="card-body">
+				<h5 class="card-title">your daily horoscope</h5>
+				<p class="card-text" id="horoscope"></p>
+			</div>
+
+			<div class="card-footer text-muted font-italic">
+				Source: <a href="http://ohmanda.com/api/horoscope/" target="_blank">Unofficial Astrology.com API</a>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript" src="/js/amusing.js"></script>

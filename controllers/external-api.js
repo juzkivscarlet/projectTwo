@@ -49,4 +49,15 @@ module.exports = function(app) {
 			data: data
 		});
 	});
+
+	app.get('/astrology/:sign', (req,res) => {
+		var sign = req.params.sign;
+		var query = "https://ohmanda.com/api/horoscope/"+sign;
+
+		axios.get(query).then((response) => {
+			res.send({
+				data: response.data.horoscope
+			});
+		});
+	});
 };

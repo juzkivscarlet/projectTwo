@@ -5,4 +5,12 @@ $(document).ready(function() {
 	}).then((data) => {
 		$("#dad-joke").text(data.joke);
 	});
+
+	$("#astro-btn").on('click', (e) => {
+		e.preventDefault();
+		
+		$.get('/astrology/'+$("#astro-sign").val(), (data) => {
+			$("#horoscope").html(data);
+		});
+	});
 });
