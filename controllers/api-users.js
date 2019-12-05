@@ -46,6 +46,9 @@ module.exports = function(app) {
 	app.get("/events", (req,res) => {
 		if(req.user) {
 			db.Events.findAll({
+				where: {
+					user: req.user.name
+				}
 			}).then((data) => {
 				res.json({data: data});
 			}).catch((err) => {
