@@ -1,4 +1,7 @@
 $(document).ready(function() {
+
+	$("#horoscope-body").css('display','none');
+
 	$.ajax({
 		url: "https://icanhazdadjoke.com",
 		dataType: 'json'
@@ -10,7 +13,8 @@ $(document).ready(function() {
 		e.preventDefault();
 		
 		$.get('/astrology/'+$("#astro-sign").val(), (data) => {
-			$("#horoscope").html(data);
+			$("#horoscope-body").css('display','block');
+			$("#horoscope").html(data.data.horoscope);
 		});
 	});
 });

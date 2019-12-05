@@ -36,21 +36,12 @@ module.exports = function(app) {
 		}
 	});
 
-	// route for '/amazing'
-	app.get('/amusing', (req,res) => {
-		res.render("amuse", {
+	// route for /cheer
+	app.get('/cheer', (req,res) => {
+		res.render("cheer", {
 			user: req.user,
 			isHome: false,
-			route: 'amusing'
-		});
-	});
-
-	// route for '/interesting'
-	app.get('/interesting', (req,res) => {
-		res.render("interest", {
-			user: req.user,
-			isHome: false,
-			route: 'interesting'
+			route: 'cheer'
 		});
 	});
 };

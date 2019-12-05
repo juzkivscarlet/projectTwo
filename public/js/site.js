@@ -17,8 +17,7 @@ $(document).ready(function() {
 
 	// highlight active navbar link
 	if(window.location.pathname=='/' || window.location.pathname=='/dashboard') $(".nav-link:contains('dashboard')").addClass('active');
-	else if(window.location.pathname=='/amusing') $(".nav-link:contains('amuse')").addClass('active');
-	else if(window.location.pathname=='/interesting') $(".nav-link:contains('interest')").addClass('active');
+	else if(window.location.pathname=='/cheer') $(".nav-link:contains('cheer')").addClass('active');
 
 	// show modals
 	$("#login-modal").on('shown.bs.modal', () => {

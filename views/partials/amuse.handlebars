@@ -1,8 +1,24 @@
 <div class="row">
 
-	<div class="col-md-6 text-center">
-		<h1>Dad Joke!</h1>
-		<p id="dad-joke"></p>
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-header">humor</div>
+
+			<div class="card-body">
+				<h5 class="card-title">Dad Joke!</h5>
+				<blockquote class="blockquote mb-0">
+					<p id="dad-joke"></p>
+					<div class="blockquote-footer">
+						Source: <cite title="API">
+							<a href="https://icanhazdadjoke.com/" target="_blank" class="font-italic">
+								icanhazdadjoke.com
+							</a>
+						</cite>
+					</div>
+				</blockquote>
+			</div>
+		</div>
+
 	</div>
 
 	<div class="col-md-6">
@@ -42,13 +58,13 @@
 
 			<hr class="my-4">
 
-			<div class="card-body">
+			<div class="card-body" id="horoscope-body">
 				<h5 class="card-title">your daily horoscope</h5>
 				<p class="card-text" id="horoscope"></p>
 			</div>
 
-			<div class="card-footer text-muted font-italic">
-				Source: <a href="http://ohmanda.com/api/horoscope/" target="_blank">Unofficial Astrology.com API</a>
+			<div class="card-footer text-muted">
+				Source: <a href="http://ohmanda.com/api/horoscope/" target="_blank" class="font-italic">Unofficial Astrology.com API</a>
 			</div>
 		</div>
 	</div>

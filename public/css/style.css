@@ -7,10 +7,21 @@ html, body {
 	height: 100%;
 }
 
+.cheer-jumbo {
+	margin-top: 16px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	height: auto;
+}
+
 #add-event-form .control-label {
 	font-weight: bold;
 }
 
 #event-daypicker {
 	display: none;
+}
+
+#weather-cards {
+	width: 100%;
 }

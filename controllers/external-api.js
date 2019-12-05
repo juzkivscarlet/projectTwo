@@ -56,7 +56,7 @@ module.exports = function(app) {
 
 		axios.get(query).then((response) => {
 			res.send({
-				data: response.data.horoscope
+				data: response.data
 			});
 		});
 	});
