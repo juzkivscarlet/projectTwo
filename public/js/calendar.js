@@ -140,20 +140,15 @@ $(document).ready(function() {
 		this.desc = desc;
 	};
 
-	Event.prototype.decipherDates = function() {
-		var dateBeginArr = this.dateBegin.split("-");
-		var dateBeginObj = {
-			year: dateBeginArr[0],
-			month: dateBeginArr[1],
-			day: dateBeginArr[2]
-		};
-
-		var dateEndArr = this.dateEnd.split("-");
-		var dateEndObj = {
-			year: dateEndArr[0],
-			month: dateEndArr[1],
-			day: dateEndArr[2]
-		};
+	Event.findDOM = function(begin, end, freq, month) {
+		var monthLayout = [month.dateLayout.rowOne, month.dateLayout.rowTwo, month.dateLayout.rowThree, month.dateLayout.rowFour, month.dateLayout.rowFive, month.dateLayout.rowSix];
+		for(var j=0; j<monthLayout.length; j++) {
+			if(monthLayout[j].includes(parseInt(begin[2]))) {
+				var row = j+1;
+				var column = monthLayout[j].indexOf(parseInt(begin[2]))+1;
+				return $(`#cal-row${row}-col${column}`);
+			}
+		}
 	};
 
 	function formatTime(time) {
@@ -166,6 +161,30 @@ $(document).ready(function() {
 
 		return hour+":"+min+" "+ampm;
 	}
+
+	function formatDate(date) {
+		var dateArr = date.split("-");
+		return dateArr[1]+" "+dateArr[2]+", "+dateArr[0];
+	}
+
+	var EventBtn = function(id) {
+		var dateBtn = $("<a>").attr('tabindex','0').addClass("btn btn-sm btn-outline-primary").html("<i class='fas fa-exclamation'></i>").attr('role','button').attr('data-toggle','popover').attr('data-trigger','focus');
+		dateBtn.attr('event',id);
+		
+		$.get(`/events/${id}`, (response) => {
+			var event = response.data[0];
+
+			var popContent = "Start date: "+formatDate(event.dateBegin)+", <br>End date: "+formatDate(event.dateEnd)+", <br>Location: "+event.location+", <br>Time: "+event.timeBegin+"-"+event.timeEnd+", <br>Repeats: "+event.frequency+", <br>Description: "+event.description;
+
+			dateBtn.popover({
+				title: event.title,
+				html: true,
+				content: popContent
+			});
+			console.log(event);
+		});
+		return dateBtn;
+	};
 
 	// ON-CLICK FUNCTIONS FOR CALENDAR (Navigation)
 
@@ -205,7 +224,6 @@ $(document).ready(function() {
 	}
 
 	// ON-CLICK FUNCTIONS FOR ACTIONS
-
 	
 	// ADD-EVENT MODAL
 	$("#add-event-btn").on('click', (e) => {
@@ -366,11 +384,26 @@ $(document).ready(function() {
 
 		var theCalendar = new Calendar(theMonth);
 		theCalendar.writeLayout();
+		getEvents(theMonth);
 	}
 
-	function getEvents(month, year) {
-		$.get('/events', (data) => {
+	function getEvents(month) {
+		$.get('/events', (response) => {
 			// put events on the month's calendar
+			for(var i=0; i<response.data.length; i++) {
+				// console.log(response.data[i]);
+
+				var dateBegin = response.data[i].dateBegin.split("-");
+				var dateEnd = response.data[i].dateEnd.split("-");
+
+				if(dateBegin[1]==month.name && dateBegin[0]==month.year) {
+					// 
+					var dateElement = Event.findDOM(dateBegin, dateEnd, response.data[i].frequency, month);
+					
+					var dateBtn = new EventBtn(response.data[i].id);
+					dateElement.append(dateBtn);
+				}
+			}
 		});
 	}
 
@@ -381,5 +414,6 @@ $(document).ready(function() {
 
 	// load tooltips
 	$('[data-toggle="tooltip"]').tooltip();
+	$('[data-toggle="popover"]').popover();
 	
 });

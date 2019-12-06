@@ -59,6 +59,19 @@ module.exports = function(app) {
 		}
 	});
 
+	app.get("/events/:id", (req,res) => {
+		db.Events.findAll({
+			where: {
+				id: req.params.id,
+				user: req.user.name
+			}
+		}).then((data) => {
+			res.json({data: data});
+		}).catch((err) => {
+			res.status(401).json(err);
+		})
+	});
+
 	app.post("/events/add", async(req,res) => {
 
 		console.log(req.user);
