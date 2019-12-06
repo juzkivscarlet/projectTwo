@@ -18,10 +18,10 @@ module.exports = {
 		"operatorsAliases": false
 	},
 	"production": {
-		"username": "root",
-		"password": null,
-		"database": "database_production",
-		"host": "127.0.0.1",
+		"username": process.env.JAWS_USER,
+		"password": process.env.JAWS_PASS,
+		"database": process.env.JAWS_DB,
+		"host": process.env.JAWS_HOST,
 		"dialect": "mysql",
 		"operatorsAliases": false
 	}
